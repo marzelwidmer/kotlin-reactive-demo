@@ -40,6 +40,8 @@ dependencies {
     implementation("de.flapdoodle.embed:de.flapdoodle.embed.mongo")
 //	testImplementation("de.flapdoodle.embed:de.flapdoodle.embed.mongo")
 	testImplementation("io.projectreactor:reactor-test")
+	testCompile ("io.projectreactor.tools:blockhound:1.0.0.M5")  // https://github.com/reactor/BlockHound
+
 }
 
 tasks.withType<Test> {
