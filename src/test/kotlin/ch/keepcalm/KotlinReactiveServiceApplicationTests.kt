@@ -1,6 +1,9 @@
 package ch.keepcalm
 
+import org.junit.jupiter.api.Assertions.assertEquals
+import org.junit.jupiter.api.Assertions.assertThrows
 import org.junit.jupiter.api.BeforeEach
+import org.junit.jupiter.api.RepeatedTest
 import org.junit.jupiter.api.Test
 import org.mockito.Mockito
 import org.springframework.beans.factory.annotation.Autowired
@@ -33,6 +36,13 @@ class KotlinReactiveServiceApplicationTests {
     }
 
     @Test
+    fun `Should throw an exception`() {
+        val exception = assertThrows(UnsupportedOperationException::class.java) { throw UnsupportedOperationException("Not supported") }
+        assertEquals(exception.message, "Not supported")
+    }
+
+
+    @RepeatedTest(value = 10)
     fun `Get all pizzas 🍕`() {
         StepVerifier.withVirtualTime { service.getAllPizzas() }
                 .expectNext(pizza1)
