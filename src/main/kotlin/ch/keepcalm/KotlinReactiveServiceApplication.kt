@@ -2,6 +2,8 @@ package ch.keepcalm
 
 import org.springframework.boot.autoconfigure.SpringBootApplication
 import org.springframework.boot.runApplication
+import org.springframework.context.annotation.Bean
+import org.springframework.context.annotation.Configuration
 import org.springframework.data.annotation.Id
 import org.springframework.data.mongodb.core.mapping.Document
 import org.springframework.data.repository.reactive.ReactiveCrudRepository
@@ -12,6 +14,7 @@ import org.springframework.web.bind.annotation.GetMapping
 import org.springframework.web.bind.annotation.PathVariable
 import org.springframework.web.bind.annotation.RequestMapping
 import org.springframework.web.bind.annotation.RestController
+import org.springframework.web.reactive.function.server.*
 import reactor.core.publisher.Flux
 import reactor.core.publisher.toFlux
 import java.time.Duration
@@ -26,9 +29,35 @@ fun main(args: Array<String>) {
     runApplication<KotlinReactiveServiceApplication>(*args)
 }
 
+
+// Functional Controller
+@Configuration
+class RouterConfig(private val service: PizzaService) {
+
+    @Bean
+    fun route() = router {
+        val resourceURL = "pizzas"
+        listOf(
+                GET("/$resourceURL", ::all),
+                GET("/$resourceURL/{id}", ::byId),
+                GET("/$resourceURL/{id}/orders", ::orders)
+        )
+    }
+
+    fun all(req: ServerRequest) = ServerResponse.ok()
+            .body(service.getAllPizzas())
+
+    fun byId(req: ServerRequest) = ServerResponse.ok()
+            .body(service.getPizzaById(id = req.pathVariable(("id"))))
+
+    fun orders(req: ServerRequest) = ServerResponse.ok()
+            .sse().body(service.getOrdersForPizzaId(pizzaId = req.pathVariable(("id"))))
+}
+
+
 @RestController
 @RequestMapping(value = ["/api/pizzas"])
-class PizzaController(private val service: PizzaService){
+class PizzaController(private val service: PizzaService) {
 
     //  http :8080/api/pizzas
     @GetMapping

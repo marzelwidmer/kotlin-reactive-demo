@@ -12,18 +12,31 @@ Based on :
 
     - https://www.youtube.com/watch?v=jf3dXYkrAtM[Mark Heckler - Full-stack Reactive Kotlin with Project Reactor & Spring Boot 2]
 
-== Get all Pizzas
+== API Servlet Controller
+=== Get all Pizzas
 ```bash
 http :8080/api/pizzas
 ```
-
-== Get all one Pizza
+=== Get all one Pizza
 ```bash
 http :8080/api/pizzas/f162dd0b-81af-4bbe-a4fc-a9e97181e201
 ```
-
-
-== Get the Order Stream
+=== Get the Order Stream
 ```bash
 http -S  :8080/api/pizzas/f162dd0b-81af-4bbe-a4fc-a9e97181e201/orders
+```
+
+
+== API Reactive Router
+=== Get all Pizzas
+```bash
+http :8080/pizzas
+```
+=== Get all one Pizza
+```bash
+http :8080/pizzas/f162dd0b-81af-4bbe-a4fc-a9e97181e201
+```
+=== Get the Order Stream
+```bash
+http -S  :8080/pizzas/f162dd0b-81af-4bbe-a4fc-a9e97181e201/orders
 ```
