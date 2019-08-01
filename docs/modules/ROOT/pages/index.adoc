@@ -1,0 +1,14 @@
+= Reactive Kotlin with Spring Boot 2
+
+ifndef::env-site,env-github[]
+include::_attributes.adoc[]
+endif::[]
+// Settings
+:idprefix:
+:idseparator: -
+
+
+Based on :
+
+    - https://www.youtube.com/watch?v=jf3dXYkrAtM[Mark Heckler - Full-stack Reactive Kotlin with Project Reactor & Spring Boot 2]
+

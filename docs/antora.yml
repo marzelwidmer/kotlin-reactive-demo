@@ -1,0 +1,7 @@
+name: Kotlin Reactive Demoe
+title: Kotlin Reactive Demoe
+version: master
+start_page: ROOT:index.adoc
+
+nav:
+- modules/ROOT/nav.adoc
