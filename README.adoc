@@ -1,1 +1,88 @@
 include::docs/modules/ROOT/pages/index.adoc[]
+
+
+
+
+
+
+
+Create Project
+```
+oc new-project dev  --display-name="Development"
+```
+
+Deploy with s2i
+```
+oc new-app fabric8/s2i-java~https://github.com/marzelwidmer/kotlin-reactive-demo.git  -n dev
+```
+Update BuildConfig with Secret from MongoDB
+```
+oc set env bc/kotlin-reactive-demo --from="secret/mongodb" --prefix=MONGO_
+```
+
+
+
+
+Clean Up
+```
+oc delete project dev
+```
+
+
+
+install Template S2i ImageStream RedHat OpenJdk18
+```
+oc create -f openshift/openjdk-s2i-imagestream.json
+```
+
+
+
+
+
+
+Fabric8 s2i
+see :https://developers.redhat.com/blog/2018/12/18/openshift-java-s2i-builder-java-11-grade/
+
+
+Gradle
+```
+oc new-app fabric8/s2i-java~https://github.com/fabric8io-images/s2i --context-dir=java/examples/gradle --name s2i-gradle-example
+oc expose svc/s2i-gradle-example; oc get route s2i-gradle-example
+```
+
+Maven Java 11
+```
+oc new-app fabric8/s2i-java:latest-java11~https://github.com/vorburger/s2i-java-example
+oc expose svc/s2i-java-example; oc get route s2i-java-example
+```
+
+
+
+
+
+
+
+
+see: https://piotrminkowski.wordpress.com/2019/01/08/running-java-microservices-on-openshift-using-source-2-image/
+```
+oc new-app fabric8/s2i-java:latest~https://github.com/piomin/sample-spring-microservices-new.git#openshift \
+    --context-dir=employee-service \
+    --name=employee
+```
+
+inject mongodb secret into BuildConfig object.
+```
+oc set env bc/employee --from="secret/mongodb" --prefix=MONGO_
+```
+
+
+```
+oc new-app fabric8/s2i-java:latest~https://github.com/piomin/sample-spring-microservices-new.git#openshift \
+    --name=department \
+    --context-dir=department-service \
+    -e EMPLOYEE_SERVICE=employee
+```
+inject mongodb secret into BuildConfig object.
+```
+oc set env bc/department --from="secret/mongodb" --prefix=MONGO_
+```
