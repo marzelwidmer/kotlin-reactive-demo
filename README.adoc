@@ -19,7 +19,15 @@ Update BuildConfig with Secret from MongoDB
 ```
 oc set env bc/kotlin-reactive-demo --from="secret/mongodb" --prefix=MONGO_
 ```
+Expose Route
+```
+oc expose svc/kotlin-reactive-demo; oc get route kotlin-reactive-demo
+```
 
+See build logs
+```
+c logs -f bc/kotlin-reactive-demo
+```
 
 
 
