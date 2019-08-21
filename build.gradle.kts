@@ -38,8 +38,8 @@ dependencies {
 //		exclude(group = "org.junit.vintage", module = "junit-vintage-engine")
 //		exclude(group = "junit", module = "junit")
 	}
-    implementation("de.flapdoodle.embed:de.flapdoodle.embed.mongo")
-//	testImplementation("de.flapdoodle.embed:de.flapdoodle.embed.mongo")
+//    implementation("de.flapdoodle.embed:de.flapdoodle.embed.mongo")
+	testImplementation("de.flapdoodle.embed:de.flapdoodle.embed.mongo")
 	testImplementation("io.projectreactor:reactor-test")
 }
 
