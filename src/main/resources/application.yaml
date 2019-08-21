@@ -4,7 +4,10 @@ spring:
 
   data:
     mongodb:
-      uri: mongodb://${MONGO_DATABASE_USER}:${MONGO_DATABASE_PASSWORD}@mongodb/${MONGO_DATABASE_NAME}
+      username: ${MONGO_DATABASE_USER}
+      password: ${MONGO_DATABASE_PASSWORD}
+      database: ${MONGO_DATABASE_NAME}
+#      uri: mongodb://${MONGO_DATABASE_USER}:${MONGO_DATABASE_PASSWORD}@mongodb/${MONGO_DATABASE_NAME}
 
 # If Spring Security is on the classpath and no other WebSecurityConfigurerAdapter is present, the actuators are secured by Spring Boot auto-config.
 management:
