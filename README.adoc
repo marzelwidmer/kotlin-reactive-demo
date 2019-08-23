@@ -3,9 +3,6 @@ include::docs/modules/ROOT/pages/index.adoc[]
 
 
 
-
-
-
 Create Project
 ```
 oc new-project dev  --display-name="Development"
@@ -26,7 +23,7 @@ oc expose svc/kotlin-reactive-demo; oc get route kotlin-reactive-demo
 
 See build logs
 ```
-c logs -f bc/kotlin-reactive-demo
+oc logs -f bc/kotlin-reactive-demo
 ```
 
 
@@ -60,8 +57,7 @@ oc expose svc/s2i-gradle-example; oc get route s2i-gradle-example
 
 Maven Java 11
 ```
-oc new-app fabric8/s2i-java:latest-java11~https://github.com/vorburger/s2i-java-example
-oc expose svc/s2i-java-example; oc get route s2i-java-example
+oc new-app fabric8/s2i-java:latest-java11~https://github.com/vorburger/s2i-java-example; oc expose svc/s2i-java-example; oc get route s2i-java-example
 ```
 
 
